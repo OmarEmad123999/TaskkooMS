@@ -1,0 +1,75 @@
+﻿@model TaskMS.ViewModel.TaskViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>tTask</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="title" class="control-label"></label>
+                <input asp-for="title" class="form-control" />
+                <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="priority" class="control-label"></label>
+                <input asp-for="priority" class="form-control" />
+                <span asp-validation-for="priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeadLine" class="control-label"></label>
+                <input asp-for="DeadLine" class="form-control" />
+                <span asp-validation-for="DeadLine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="projectid" class="control-label"></label>
+                <select asp-for="projectid" class="form-control">
+                    <option value="">select a project</option>
+                    @foreach(var it in Model.projectts)
+                    {
+                        <option value="@it.ProjectId">@it.ProjectId - @it.ProjectName</option>
+                    }
+                </select>
+                <span asp-validation-for="projectid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="memberid" class="control-label"></label>
+                <select asp-for="memberid" class="form-control">
+                    <option value="">Select a member</option>
+                    @foreach(var ir in Model.teamMembers)
+                    {
+                        <option value="@ir.MemberId">@ir.MemberId - @ir.MemberName</option>
+                    }
+                </select>
+                <span asp-validation-for="memberid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

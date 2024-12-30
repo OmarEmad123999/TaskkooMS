@@ -1,0 +1,98 @@
+﻿@model TaskMS.Models.Projectt
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Projectt</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProjectDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProjectDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+    </dl>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                Title
+            </td>
+            <td>
+                Description
+            </td>
+            <td>
+                Status
+            </td>
+            <td>
+                Priority
+            </td>
+            <td>
+                DeadLine
+            </td>
+            <td>
+                TeamMember
+            </td>
+            <td>
+                operation
+            </td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.tasks)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskPriority)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeadLine)
+                </td>
+                <td>
+                    <a asp-controller="TeamMembers" asp-action="Details" asp-route-id="@item.TeamMemberId">@item.teamMember.MemberName</a>
+                </td>
+                <td>
+                    <a asp-controller="tTasks" asp-action="Edit" asp-route-id="@item.TaskID">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ProjectId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
